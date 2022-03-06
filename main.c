@@ -15,30 +15,10 @@
 #include "screen2.h"
 
 extern uint8_t tiles1[];
-extern uint8_t tiles2[];
-extern uint8_t bg1map[];
-extern uint8_t bg2map[];
 extern uint8_t palette[];
-extern uint8_t backpal[];
 
 uint16_t blockmap[0x400];
-uint16_t backmap[0x400];
 uint16_t pal[0x100];
-uint8_t blocks[0x64];
-
-uint8_t map[0x64] = 
-{
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
- 0,1,2,3,4,5,6,7,8,0,
-};
 
 enum {
   SCREEN_REGISTERS = 1,
@@ -108,9 +88,7 @@ int main()
   snesc_init();
 
   settiles(0, tiles1, 0xF00);
-  settiles(1, tiles2, 0x250);
-  memset(backmap, 0x01, 0x800);
-  memcpy(blocks, map, 0x64);
+  memset(blockmap, 0x00, 0x800);
   memcpy(pal, palette, 0x200);
 
   screen1ReadAllRegisters();
@@ -123,7 +101,6 @@ int main()
   enablescreen();
 
   setmap(0, (uint8_t*)blockmap);
-  setmap(1, (uint8_t*)backmap);
 
   while(1)
     idle();

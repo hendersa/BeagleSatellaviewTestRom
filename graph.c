@@ -14,11 +14,37 @@ void snesc_vblank(void);
 
 void enablescreen(void)
 {
+  poke(0x2101, 0); // Sprite register (size)
+  poke(0x2102, 0); // Sprite registers (OAM address)
+  poke(0x2103, 0); // Sprite registers (OAM address)
   poke(0x2105, 9); // BG mode 1
+  poke(0x2106, 0); // No planes, no mosaic
+  poke(0x2107, 0); // BG1 map location
+  poke(0x2108, 0); // BG2 map location
   poke(0x2109, 4); // BG3 map location
-  poke(0x210b, 1); // BG1/2 tiles location
-  poke(0x210c, 2); // BG3/4 tiles location
-  poke(0x212c, 0x15); // enable BG1, BG3, OBJ display
+  poke(0x210A, 0); // BG4 map location
+  poke(0x210B, 1); // BG1/2 tiles location
+  poke(0x210C, 0); // BG3/4 tiles location
+  poke(0x210D, 0); // BG1 scroll X (11:3 bits)
+  poke(0x210D, 0); // BG1 scroll x (2:0 bits)
+  poke(0x210E, 0xFF); // BG1 scroll y (11:3 bits)
+  poke(0x210E, 0x07); // BG1 scroll y (2:0 bits)
+  poke(0x210F, 0); // BG2 scroll x (11:3 bits)
+  poke(0x210F, 0); // BG2 scroll x (2:0 bits)
+  poke(0x2110, 0xFF); // BG2 scroll y (11:3 bits)
+  poke(0x2110, 0x07); // BG2 scroll y (2:0 bits)
+  poke(0x2111, 0); // BG3 scroll x (11:3 bits)
+  poke(0x2111, 0); // BG3 scroll x (2:0 bits)
+  poke(0x2112, 0xFF); // BG3 scroll y (11:3 bits)
+  poke(0x2112, 0x07); // BG3 scroll y (2:0 bits)
+  poke(0x2113, 0); // BG4 scroll x (11:3 bits)
+  poke(0x2113, 0); // BG4 scroll x (2:0 bits)
+  poke(0x2114, 0xFF); // BG4 scroll y (11:3 bits)
+  poke(0x2114, 0x07); // BG4 scroll y (2:0 bits)
+  poke(0x2115, 0x80); // VRAM address increment register
+  poke(0x2116, 0); // VRAM address low
+  poke(0x2117, 0); // VRAM address high
+  poke(0x212C, 0x01);
   poke(0x2100, 0x80); // force blank
   snesc_vblank();   // flush pending DMA jobs before turning on screen
   poke(0x2100, 0xf); // turn on screen, full brightness

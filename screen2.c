@@ -35,7 +35,7 @@ void screen2Redraw(void) {
   uint8_t line = 1;
 
   /* Header label (3 lines) */
-  writestring(" SatellaView Register Test ROM ", blockmap, (LINE_BLOCKS * line++), 0x3F6);
+  writestring(" Satellaview Register Test ROM ", blockmap, (LINE_BLOCKS * line++), 0x3F6);
 
   writestring(LINE_BLANK, blockmap, (LINE_BLOCKS * line++), 0x3F6);
   writestring(LINE_BLANK, blockmap, (LINE_BLOCKS * line++), 0x3F6);
